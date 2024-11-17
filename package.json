@@ -1,18 +1,15 @@
 {
-  "name": "example2",
+  "name": "blockchain-cyberk-course",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
+  "description": "",
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
-    "hardhat": "^2.19.1"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0"
+    "hardhat": "^2.22.15"
   }
 }
