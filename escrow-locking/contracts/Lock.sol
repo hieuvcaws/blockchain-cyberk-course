@@ -36,7 +36,17 @@ contract Escrow {
     function withdraw() public {
         if (msg.sender != claimer) revert OnlyClaimerCanWithdraw(msg.sender);
         if (currentWithdrawal >= totalWithdrawals) revert NoMoreWithdrawals();
-        if (block.timestamp < depositTime + 1 weeks) revert("Withdrawals can only be made after one week from deposit");
+        
+        if (currentWithdrawal == 0) {
+            currentWithdrawal++;
+            (bool sent, ) = msg.sender.call{value: amountPerWithdrawal}("");
+            if (!sent) revert FailedToSendEther(msg.sender);
+            return;
+        }
+
+        if (block.timestamp < depositTime + (currentWithdrawal + 1) * 1 weeks) {
+            revert("Withdrawals can only be made after the required waiting period");
+        }
         
         currentWithdrawal++;
         (bool sent, ) = msg.sender.call{value: amountPerWithdrawal}("");
